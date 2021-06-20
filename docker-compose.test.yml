@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  integration_tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    command: pytest -vv
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      SERVER_HOST: http://web
+      SERVER_PORT: 8000
+    depends_on:
+      - db
+      - web
